@@ -1,7 +1,7 @@
 import random, sys
 random.seed(42)
-from person import Person
-from logger import Logger
+from tj_person import Person
+from tj_logger import Logger
 
 class Simulation(object):
     
@@ -18,7 +18,7 @@ class Simulation(object):
         self.basic_repro_num = basic_repro_num
         self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(
             virus_name, population_size, vacc_percentage, initial_infected)
-        self.logger = logger
+        self.logger = Logger(self.file_name)
         self.newly_infected = []
 
 
@@ -46,7 +46,7 @@ class Simulation(object):
                 self.next_person_id += 1
         return population
 
-    def _simulation_should_continue(self): #DONE
+    def _simulation_should_continue(self): 
 
         if pop_size == 0 or infected_count == 0:
             return False
@@ -55,57 +55,45 @@ class Simulation(object):
     
 
     def run(self):
-        # TODO: Finish this method.  This method should run the simulation until
-        # everyone in the simulation is dead, or the disease no longer exists in the
-        # population. To simplify the logic here, we will use the helper method
-        # _simulation_should_continue() to tell us whether or not we should continue
-        # the simulation and run at least 1 more time_step.
-
-        # This method should keep track of the number of time steps that
-        # have passed using the time_step_counter variable.  Make sure you remember to
-        # the logger's log_time_step() method at the end of each time step, pass in the
-        # time_step_counter variable!
         time_step_counter = 0
-        # TODO: Remember to set this variable to an intial call of
-        # self._simulation_should_continue()!
-        should_continue = None
+        should_continue = self._simulation_should_continue
         while should_continue:
-        # TODO: for every iteration of this loop, call self.time_step() to compute another
-        # round of this simulation.  At the end of each iteration of this loop, remember
-        # to rebind should_continue to another call of self._simulation_should_continue()!
-            pass
+            self.time_step()
+            log_time_step(time_step_counter)
+            time_step_counter += 1
+            should_continue = self._simulation_should_continue
         print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
 
-    def time_step(self): #DONE
+    def time_step(self): 
         for person.infected in population:
             for i in range(100):
-                person in population = random_person
-                    if random_person.is_alive = False:
-                        break
+                for person in population:
+                    if person.is_alive == False:
+                        return
                     else: 
                         simulation.interaction(person, random_person)
                         interaction.counter += 1
             time_step_counter += 1
 
-    def interaction(self, person, random_person): #DONE
-        assert person1.is_alive = True
-        assert random_person.is_alive = True
+    def interaction(self, person, random_person): 
+        assert person1.is_alive == True
+        assert random_person.is_alive == True
 
-        if random_person.is_vaccinated = True:
+        if random_person.is_vaccinated == True:
             self.logger.log_interaction()
-            break
+            return
 
-        if random_person.infected = True:
+        if random_person.infected == True:
             self.logger.log_interaction()
-            break
+            return
 
-        if random_person.infected = False and random_person.is_vaccinated = False:
+        if random_person.infected == False and random_person.is_vaccinated == False:
             random_number = random.uniform(0,1)
             if random_number < basic_repro_num:
                 newly_infected.append(random_person.ID)
                 self.log_interaction()
 
-    def _infect_newly_infected(self): #DONE
+    def _infect_newly_infected(self): 
         for person in self.newly_infected:
                 for person.id in self.newly_infected:
                     person.infected = True

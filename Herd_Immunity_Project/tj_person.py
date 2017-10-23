@@ -13,14 +13,14 @@ class Person(object):
 
         random_num = random.uniform(0,1)
 
-        if self.infected = None:
+        if self.infected == None:
             return     
-        if self.infected = True and random_num < self.mortality_rate:
+        if self.infected == True and random_num < self.mortality_rate:
             self.is_alive = False
 
             return False
 
-        if self.infected = True and random_num > self.mortality_rate:
+        if self.infected == True and random_num > self.mortality_rate:
             self.is_alive = True
             self.infected = False
 
